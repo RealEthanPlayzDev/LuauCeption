@@ -38,10 +38,7 @@ end
 
 local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, covLevel: number?)
     --// Source string
-	local srcLen = #src
-    local srcPtr = cfns.malloc(srcLen + 1)
-    rt.store.string(memory_at_0, srcPtr, src)
-    rt.store.i32_n8(memory_at_0, srcPtr + srcLen, 0)
+    local srcPtr = cstr(src)
 
     --// Struct lua_CompileOptions (see luau/Compiler/include/luacode.h)
     local compileOptsPtr = cfns.malloc(28)

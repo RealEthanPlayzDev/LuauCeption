@@ -196,24 +196,6 @@ local function fd_flush(file)
     file[1] = string.sub(final, last + 1)
 end
 
-local function stub(name, ret)
-    return function(...)
-        if (STUB_WARN) then print(`stub: {name} called`) end
-        return ret
-    end
-end
-
---// TODO: Properly handle exceptions
-local function invokeHandler(index)
-    return function(...)
-        local args = table.pack(...)
-        local result = table.pack(pcall(function() return TABLE_LIST[0].data[index](table.unpack(args)) end))
-        local success = table.remove(result, 1)
-        assert(success, "exception occured in c")
-        return table.unpack(result)
-    end
-end
-
 --// __cxa_throw
 FUNC_LIST[0] = function(except, _info, _dtor)
     assert(false, "exception occured in c")
@@ -279,13 +261,10 @@ rt.store.i32(memory_at_0, zeroIntPtr, 0)
 
 local function luau_run(bc: string, chunkName: string?, safeEnv: boolean?)
     --// Bytecode
-    local bcPtr = cfns.malloc(#bc)
-    rt.store.string(memory_at_0, bcPtr, bc)
+    local bcPtr = cstr(bc)
 
     --// Chunk name
-    local chunkName = chunkName or "LuauCeptionChunk"
-    local cnPtr = cfns.malloc(#chunkName)
-    rt.store.string(memory_at_0, cnPtr, chunkName)
+    local cnPtr = cstr(chunkName or "LuauCeptionChunk")
 
     --// State setup
     local L = cfns.luaL_newstate()

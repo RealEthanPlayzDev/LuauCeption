@@ -183,6 +183,9 @@ local cfns = {
     ["luau_load"] = FUNC_LIST[795],
 }
 
+local NOW_TIME = os.time() * 1000
+local FILE_MAP = { {}, {} }
+
 local function fd_flush(file)
     local final = table.concat(file)
     local last = 1
@@ -192,24 +195,6 @@ local function fd_flush(file)
     end
     table.clear(file)
     file[1] = string.sub(final, last + 1)
-end
-
-local function stub(name, ret)
-    return function(...)
-        if (STUB_WARN) then print(`stub: {name} called`) end
-        return ret
-    end
-end
-
---// TODO: Properly handle exceptions
-local function invokeHandler(index)
-    return function(...)
-        local args = table.pack(...)
-        local result = table.pack(pcall(function() return TABLE_LIST[0].data[index](table.unpack(args)) end))
-        local success = table.remove(result, 1)
-        assert(success, "exception occured in c")
-        return table.unpack(result)
-    end
 end
 
 --// __cxa_throw
@@ -277,10 +262,7 @@ rt.store.i32(memory_at_0, zeroIntPtr, 0)
 
 local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, covLevel: number?)
     --// Source string
-	local srcLen = #src
-    local srcPtr = cfns.malloc(srcLen + 1)
-    rt.store.string(memory_at_0, srcPtr, src)
-    rt.store.i32_n8(memory_at_0, srcPtr + srcLen, 0)
+	local srcPtr = cstr(src)
 
     --// Struct lua_CompileOptions (see luau/Compiler/include/luacode.h)
     local compileOptsPtr = cfns.malloc(28)
@@ -311,13 +293,10 @@ end
 
 local function luau_run(bc: string, chunkName: string?, safeEnv: boolean?)
     --// Bytecode
-    local bcPtr = cfns.malloc(#bc)
-    rt.store.string(memory_at_0, bcPtr, bc)
+    local bcPtr = cstr(bc)
 
     --// Chunk name
-    local chunkName = chunkName or "LuauCeptionChunk"
-    local cnPtr = cfns.malloc(#chunkName)
-    rt.store.string(memory_at_0, cnPtr, chunkName)
+    local cnPtr = cstr(chunkName or "LuauCeptionChunk")
 
     --// State setup
     local L = cfns.luaL_newstate()
