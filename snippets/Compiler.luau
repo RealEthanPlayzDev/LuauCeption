@@ -1,5 +1,5 @@
 --// LuauCeption - Compiler variant
---// Luau 0.620 (67e16cba1826351e28d0bd193cedea14d01cbbee)
+--// Luau 0.621 (9c2146288d78e8beacefe692ae1149fec066440e)
 
 local STUB_WARN = true
 
@@ -12,9 +12,6 @@ local cfns = {
     ["malloc"] = FUNC_LIST[513],
     ["free"] = FUNC_LIST[515],
 }
-
-run_init_code()
-memory_at_0 = MEMORY_LIST[0]
 
 --// __cxa_throw
 FUNC_LIST[0] = function(except, _info, _dtor)
@@ -36,6 +33,9 @@ FUNC_LIST[3] = function(reason)
     assert(false, `Aborted({reason})`)
 end
 
+run_init_code()
+memory_at_0 = MEMORY_LIST[0]
+
 local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, covLevel: number?)
     --// Source string
     local srcPtr = cstr(src)
@@ -54,7 +54,7 @@ local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, c
     local bcSizePtr = cfns.malloc(8)
 
     --// Compile
-    local bcPtr = cfns.luau_compile(srcPtr, srcLen, compileOptsPtr, bcSizePtr)
+    local bcPtr = cfns.luau_compile(srcPtr, #src, compileOptsPtr, bcSizePtr)
     local bcSize = rt.load.i32(memory_at_0, bcSizePtr)
     local bc = rt.load.string(memory_at_0, bcPtr, bcSize)
 

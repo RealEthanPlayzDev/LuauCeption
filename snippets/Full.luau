@@ -1,5 +1,5 @@
---// LuauCeption - VM variant
---// Luau 0.620 (67e16cba1826351e28d0bd193cedea14d01cbbee)
+--// LuauCeption - Full variant
+--// Luau 0.621 (9c2146288d78e8beacefe692ae1149fec066440e)
 
 local STUB_WARN = true
 
@@ -278,7 +278,7 @@ local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, c
     local bcSizePtr = cfns.malloc(8)
 
     --// Compile
-    local bcPtr = cfns.luau_compile(srcPtr, srcLen, compileOptsPtr, bcSizePtr)
+    local bcPtr = cfns.luau_compile(srcPtr, #src, compileOptsPtr, bcSizePtr)
     local bcSize = rt.load.i32(memory_at_0, bcSizePtr)
     local bc = rt.load.string(memory_at_0, bcPtr, bcSize)
 
@@ -304,7 +304,7 @@ local function luau_run(bc: string, chunkName: string?, safeEnv: boolean?)
     if (safeEnv) then cfns.luaL_sandbox(L) end
 
     --// Load bytecode
-    local ldResPtr = cfns.luau_load(L, cnPtr, bcPtr, cfns.strlen(bcPtr), 0)
+    local ldResPtr = cfns.luau_load(L, cnPtr, bcPtr, #bc, 0)
     local ldRes = rt.load.i32(memory_at_0, ldResPtr)
 
     --// Cleanup unused stuff

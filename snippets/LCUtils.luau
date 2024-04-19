@@ -1,7 +1,7 @@
 local function cstr(str)
     local strLen = #str
     local strPtr = cfns.malloc(strLen + 1)
-    rt.store.string(memory_at_0, strPtr, src)
+    rt.store.string(memory_at_0, strPtr, str)
     rt.store.i32_n8(memory_at_0, strPtr + strLen, 0)
     return strPtr
 end
