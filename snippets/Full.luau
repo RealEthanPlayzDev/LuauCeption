@@ -1,5 +1,5 @@
 --// LuauCeption - Full variant
---// Luau 0.621 (9c2146288d78e8beacefe692ae1149fec066440e)
+--// Luau 0.624 (8a64cb8b73996bd69c2734c607acd4b7d092358a)
 
 local STUB_WARN = true
 
