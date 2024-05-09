@@ -1,15 +1,15 @@
 --// LuauCeption - VM variant
---// Luau 0.621 (9c2146288d78e8beacefe692ae1149fec066440e)
+--// Luau 0.624 (8a64cb8b73996bd69c2734c607acd4b7d092358a)
 
 local STUB_WARN = true
 
 local cfns = {
     ["luaL_newstate"] = FUNC_LIST[313],
     ["lua_close"] = FUNC_LIST[380],
-    ["set_flag"] = FUNC_LIST[647],
-    ["set_all_flags"] = FUNC_LIST[655],
-    ["reset_flags"] = FUNC_LIST[657],
-    ["strlen"] = FUNC_LIST[612],
+    ["set_flag"] = FUNC_LIST[648],
+    ["set_all_flags"] = FUNC_LIST[656],
+    ["reset_flags"] = FUNC_LIST[658],
+    ["strlen"] = FUNC_LIST[613],
     ["lua_checkstack"] = FUNC_LIST[84],
     ["lua_rawcheckstack"] = FUNC_LIST[85],
     ["lua_xmove"] = FUNC_LIST[86],
@@ -168,8 +168,8 @@ local cfns = {
     ["luaL_openlibs"] = FUNC_LIST[310],
     ["luaL_sandbox"] = FUNC_LIST[311],
     ["luaL_sandboxthread"] = FUNC_LIST[312],
-    ["malloc"] = FUNC_LIST[617],
-    ["free"] = FUNC_LIST[619],
+    ["malloc"] = FUNC_LIST[618],
+    ["free"] = FUNC_LIST[620],
     ["lua_clock"] = FUNC_LIST[371],
     ["lua_newstate"] = FUNC_LIST[377],
     ["lua_resetthread"] = FUNC_LIST[375],
@@ -177,9 +177,9 @@ local cfns = {
     ["luaopen_os"] = FUNC_LIST[366],
     ["luaopen_string"] = FUNC_LIST[386],
     ["luaopen_math"] = FUNC_LIST[315],
-    ["luaopen_utf8"] = FUNC_LIST[462],
+    ["luaopen_utf8"] = FUNC_LIST[463],
     ["lua_isthreadreset"] = FUNC_LIST[376],
-    ["luau_load"] = FUNC_LIST[554],
+    ["luau_load"] = FUNC_LIST[555],
 }
 
 local NOW_TIME = os.time() * 1000
