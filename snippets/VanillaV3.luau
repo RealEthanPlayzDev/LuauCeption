@@ -42,7 +42,7 @@ if not Vector3 then
         v3_2 = if (typeof(v3_2) == "number") then Vector3.new(v3_2, v3_2, v3_2) else v3_2
         return Vector3.new(self.X / v3_2.X, self.Y / v3_2.Y, self.Z / v3_2.Z)
     end
-    Vector3Internal.__div = function(_, t)
+    Vector3Internal.__mod = function(_, t)
         if (typeof(t) == "table") and (t["__type"] == "Vector3") then
             assert(false, "attempt to perform arithmetic (mod) on Vector3")
         else
