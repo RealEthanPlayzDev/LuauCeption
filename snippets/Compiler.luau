@@ -14,8 +14,9 @@ local cfns = {
 }
 
 --// __cxa_throw
-FUNC_LIST[0] = function(except, _info, _dtor)
-    assert(false, "exception occured in c")
+FUNC_LIST[0] = function(except, info, _dtor)
+    local info = CException.new(info)
+    assert(false, `exception occured in c: {info:_UndecoratedName()} ({info:vfptr()})`)
 end
 
 --// emscripten_memcpy_js (emscripten_memcpy_big)
