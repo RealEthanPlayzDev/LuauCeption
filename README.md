@@ -6,4 +6,5 @@ Running Luau inside Luau. Inspired by [@Rerumu's LuauInLuau](https://gist.github
 - Proper C exception handling not available
 
 ## Special thanks
-- [@Rerumu](https://github.com/Rerumu)
+- [@Rerumu](https://github.com/Rerumu) - a LOT of troubleshooting
+- Tryptamine - C exception handling
