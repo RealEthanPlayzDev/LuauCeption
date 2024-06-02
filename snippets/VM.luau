@@ -180,6 +180,9 @@ local cfns = {
     ["luaopen_utf8"] = FUNC_LIST[463],
     ["lua_isthreadreset"] = FUNC_LIST[376],
     ["luau_load"] = FUNC_LIST[555],
+    ["setThrew"] = FUNC_LIST[636],
+    ["stackSave"] = FUNC_LIST[645],
+    ["stackRestore"] = FUNC_LIST[646],
 }
 
 local NOW_TIME = os.time() * 1000
@@ -257,9 +260,6 @@ FUNC_LIST[11] = stub("_gmtime_js", 0)
 run_init_code()
 memory_at_0 = MEMORY_LIST[0]
 
-local zeroIntPtr = cfns.malloc(4)
-rt.store.i32(memory_at_0, zeroIntPtr, 0)
-
 local function luau_run(bc: string, chunkName: string?, safeEnv: boolean?)
     --// Bytecode
     local bcPtr = cstr(bc)
@@ -273,24 +273,18 @@ local function luau_run(bc: string, chunkName: string?, safeEnv: boolean?)
     if (safeEnv) then cfns.luaL_sandbox(L) end
 
     --// Load bytecode
-    local ldResPtr = cfns.luau_load(L, cnPtr, bcPtr, #bc, 0)
-    local ldRes = rt.load.i32(memory_at_0, ldResPtr)
+    local ldRes = cfns.luau_load(L, cnPtr, bcPtr, #bc, 0)
 
     --// Cleanup unused stuff
     cfns.free(bcPtr)
     cfns.free(cnPtr)
-    cfns.free(ldResPtr)
 
     --// Check if load succeded
     if (ldRes ~= 0) then cfns.lua_close(L) end
     assert(ldRes == 0, "failed to load luau bytecode")
 
     --// Call function
-    local clResPtr = cfns.lua_pcall(L, zeroIntPtr, zeroIntPtr, zeroIntPtr)
-    local clRes = rt.load.i32(memory_at_0, clResPtr)
-
-    --// Cleanup unused stuff
-    cfns.free(clResPtr)
+    local clRes = cfns.lua_pcall(L, 0, 0, 0)
 
     return clRes == 0
 end

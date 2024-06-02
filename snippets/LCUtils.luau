@@ -13,13 +13,17 @@ local function stub(name, ret)
     end
 end
 
---// TODO: Properly handle exceptions
 local function invokeHandler(index)
     return function(...)
         local args = table.pack(...)
-        local result = table.pack(pcall(function() return TABLE_LIST[0].data[index](table.unpack(args)) end))
-        local success = table.remove(result, 1)
-        assert(success, "exception occured in c")
-        return table.unpack(result)
+        local fnIndex = table.remove(args, 1)
+        local sp = cfns.stackSave()
+        local e, stacktrace = "N/A", "N/A"
+        local success = xpcall(function() return TABLE_LIST[0].data[fnIndex](table.unpack(args)) end, function(a) e = a; stacktrace = debug.traceback() end)
+        if (not success) then
+            cfns.stackRestore(sp)
+            assert(typeof(e) ~= "string", `{e}\n\ninvoke stacktrace:\n{stacktrace}`)
+            cfns.setThrew(1, 0)
+        end
     end
 end
