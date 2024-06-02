@@ -1,16 +1,16 @@
 --// LuauCeption - Compiler variant
---// Luau 0.621 (9c2146288d78e8beacefe692ae1149fec066440e)
+--// Luau 0.624 (8a64cb8b73996bd69c2734c607acd4b7d092358a)
 
 local STUB_WARN = true
 
 local cfns = {
-    ["luau_compile"] = FUNC_LIST[241],
-    ["set_flag"] = FUNC_LIST[534],
-    ["set_all_flags"] = FUNC_LIST[541],
-    ["reset_flags"] = FUNC_LIST[543],
-    ["strlen"] = FUNC_LIST[504],
-    ["malloc"] = FUNC_LIST[513],
-    ["free"] = FUNC_LIST[515],
+    ["luau_compile"] = FUNC_LIST[264],
+    ["set_flag"] = FUNC_LIST[557],
+    ["set_all_flags"] = FUNC_LIST[564],
+    ["reset_flags"] = FUNC_LIST[566],
+    ["strlen"] = FUNC_LIST[527],
+    ["malloc"] = FUNC_LIST[536],
+    ["free"] = FUNC_LIST[538],
 }
 
 --// __cxa_throw
