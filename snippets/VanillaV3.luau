@@ -62,15 +62,15 @@ if not Vector3 then
         return self.X..", "..self.Y..", "..self.Z
     end
     Vector3Internal.__eq = function(self, v3_2)
-        if (typeof(v3_2) ~= "table") or (v3_2["__type"] == "Vector3") then return false end
+        if (typeof(v3_2) ~= "Vector3") then return false end
         return (self.X == v3_2.X) and (self.Y == v3_2.Y) and (self.Z == v3_2.Z)
     end
     Vector3Internal.__lt = function(self, v3_2)
-        if (typeof(v3_2) ~= "table") or (v3_2["__type"] == "Vector3") then return false end
+        if (typeof(v3_2) ~= "Vector3") then return false end
         return (self.X < v3_2.X) and (self.Y < v3_2.Y) and (self.Z < v3_2.Z)
     end
     Vector3Internal.__le = function(self, v3_2)
-        if (typeof(v3_2) ~= "table") or (v3_2["__type"] == "Vector3") then return false end
+        if (typeof(v3_2) ~= "Vector3") then return false end
         return (self.X <= v3_2.X) and (self.Y <= v3_2.Y) and (self.Z <= v3_2.Z)
     end
     Vector3Internal.__len = function()

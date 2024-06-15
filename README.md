@@ -7,4 +7,5 @@ Running Luau inside Luau. Inspired by [@Rerumu's LuauInLuau](https://gist.github
 
 ## Special thanks
 - [@Rerumu](https://github.com/Rerumu) - a LOT of troubleshooting
-- Tryptamine - C exception handling
+- Tryptamine (@Lemonchat) - C exception handling
+- gamerer123 (@Lemonchat) - pointing out a oversight in the V3 implementation (that broke number precision)
