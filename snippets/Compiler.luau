@@ -1,16 +1,19 @@
 --// LuauCeption - Compiler variant
---// Luau 0.628 (daf79328fc85bae9781239271ff3184153484363)
+--// Luau 0.630 (7d4033071abebe09971b410d362c00ffb3084afb)
 
 local STUB_WARN = true
 
 local cfns = {
-    ["luau_compile"] = FUNC_LIST[269],
-    ["set_flag"] = FUNC_LIST[562],
-    ["set_all_flags"] = FUNC_LIST[569],
-    ["reset_flags"] = FUNC_LIST[571],
-    ["strlen"] = FUNC_LIST[532],
-    ["malloc"] = FUNC_LIST[541],
-    ["free"] = FUNC_LIST[543],
+    ["luau_compile"] = FUNC_LIST[272],
+    ["set_flag"] = FUNC_LIST[568],
+    ["set_all_flags"] = FUNC_LIST[575],
+    ["reset_flags"] = FUNC_LIST[577],
+    ["strlen"] = FUNC_LIST[538],
+    ["malloc"] = FUNC_LIST[547],
+    ["free"] = FUNC_LIST[549],
+    ["_emscripten_stack_restore"] = FUNC_LIST[557],
+    ["_emscripten_stack_alloc"] = FUNC_LIST[558],
+    ["emscripten_stack_get_current"] = FUNC_LIST[559],
 }
 
 --// __cxa_throw
@@ -29,7 +32,7 @@ FUNC_LIST[2] = function(_requestedSize)
     assert(false, "OOM")
 end
 
---// abort
+--// _abort_js
 FUNC_LIST[3] = function(reason)
     assert(false, `Aborted({reason})`)
 end
