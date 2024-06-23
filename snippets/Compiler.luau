@@ -1,5 +1,5 @@
 --// LuauCeption - Compiler variant
---// Luau 0.630 (7d4033071abebe09971b410d362c00ffb3084afb)
+--// Luau 0.631 (caee04d82d014ed104dd63edec1710fb6ab5794c)
 
 local STUB_WARN = true
 
@@ -12,7 +12,6 @@ local cfns = {
     ["malloc"] = FUNC_LIST[547],
     ["free"] = FUNC_LIST[549],
     ["_emscripten_stack_restore"] = FUNC_LIST[557],
-    ["_emscripten_stack_alloc"] = FUNC_LIST[558],
     ["emscripten_stack_get_current"] = FUNC_LIST[559],
 }
 
