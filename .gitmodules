@@ -1,3 +1,6 @@
 [submodule "luau"]
 	path = luau
 	url = https://github.com/luau-lang/luau.git
+[submodule "src/tests/frktest"]
+	path = src/tests/frktest
+	url = https://github.com/itsfrank/frktest.git

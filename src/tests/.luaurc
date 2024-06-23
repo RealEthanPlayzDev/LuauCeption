@@ -1,0 +1,10 @@
+{
+	"languageMode": "strict",
+	"lint": {
+		"LocalShadow": false,
+		"LocalUnused": false
+	},
+	"aliases": {
+		"frktest": "./frktest/src"
+	}
+}
