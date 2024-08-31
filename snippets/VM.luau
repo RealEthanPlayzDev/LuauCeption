@@ -1,15 +1,15 @@
 --// LuauCeption - VM variant
---// Luau 0.631 (caee04d82d014ed104dd63edec1710fb6ab5794c)
+--// Luau 0.640 (d518d14b922ff80e7e17d1912d637225472117a1)
 
 local STUB_WARN = true
 
 local cfns = {
     ["luaL_newstate"] = FUNC_LIST[312],
     ["lua_close"] = FUNC_LIST[379],
-    ["set_flag"] = FUNC_LIST[655],
-    ["set_all_flags"] = FUNC_LIST[663],
-    ["reset_flags"] = FUNC_LIST[665],
-    ["strlen"] = FUNC_LIST[620],
+    ["set_flag"] = FUNC_LIST[654],
+    ["set_all_flags"] = FUNC_LIST[662],
+    ["reset_flags"] = FUNC_LIST[664],
+    ["strlen"] = FUNC_LIST[619],
     ["lua_checkstack"] = FUNC_LIST[83],
     ["lua_rawcheckstack"] = FUNC_LIST[84],
     ["lua_xmove"] = FUNC_LIST[85],
@@ -170,7 +170,7 @@ local cfns = {
     ["luaL_sandboxthread"] = FUNC_LIST[311],
     ["lua_clock"] = FUNC_LIST[370],
     ["lua_newstate"] = FUNC_LIST[376],
-    ["free"] = FUNC_LIST[627],
+    ["free"] = FUNC_LIST[626],
     ["lua_resetthread"] = FUNC_LIST[374],
     ["luaopen_table"] = FUNC_LIST[432],
     ["luaopen_os"] = FUNC_LIST[365],
@@ -179,10 +179,10 @@ local cfns = {
     ["luaopen_utf8"] = FUNC_LIST[462],
     ["lua_isthreadreset"] = FUNC_LIST[375],
     ["luau_load"] = FUNC_LIST[554],
-    ["malloc"] = FUNC_LIST[625],
-    ["setThrew"] = FUNC_LIST[635],
-    ["_emscripten_stack_restore"] = FUNC_LIST[644],
-    ["emscripten_stack_get_current"] = FUNC_LIST[646],
+    ["malloc"] = FUNC_LIST[624],
+    ["setThrew"] = FUNC_LIST[634],
+    ["_emscripten_stack_restore"] = FUNC_LIST[643],
+    ["emscripten_stack_get_current"] = FUNC_LIST[645],
 }
 
 local NOW_TIME = os.time() * 1000
@@ -231,13 +231,13 @@ FUNC_LIST[6] = function(fd, list, count, ret_pointer)
     if not file then return 8 end
     local total = 0
     for pointer = list, list + (count - 1) * 8, 8 do
-        local start = load_i32(memory_at_0, pointer)
-        local len = load_i32(memory_at_0, pointer + 4)
-        local read = rt.load.string(memory_at_0, start, len)
+        local start = rt_load_i32(memory_at_0, pointer)
+        local len = rt_load_i32(memory_at_0, pointer + 4)
+        local read = rt_load_string(memory_at_0, start, len)
         table.insert(file, read)
         total = total + #read
     end
-    store_i32(memory_at_0, ret_pointer, total)
+    rt_store_i32(memory_at_0, ret_pointer, total)
     fd_flush(file)
     return 0
 end

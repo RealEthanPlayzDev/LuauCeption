@@ -1,18 +1,18 @@
 --// LuauCeption - Compiler variant
---// Luau 0.631 (caee04d82d014ed104dd63edec1710fb6ab5794c)
+--// Luau 0.640 (d518d14b922ff80e7e17d1912d637225472117a1)
 
 local STUB_WARN = true
 
 local cfns = {
-    ["luau_compile"] = FUNC_LIST[272],
-    ["set_flag"] = FUNC_LIST[568],
-    ["set_all_flags"] = FUNC_LIST[575],
-    ["reset_flags"] = FUNC_LIST[577],
-    ["strlen"] = FUNC_LIST[538],
-    ["malloc"] = FUNC_LIST[547],
-    ["free"] = FUNC_LIST[549],
-    ["_emscripten_stack_restore"] = FUNC_LIST[557],
-    ["emscripten_stack_get_current"] = FUNC_LIST[559],
+    ["luau_compile"] = FUNC_LIST[271],
+    ["set_flag"] = FUNC_LIST[570],
+    ["set_all_flags"] = FUNC_LIST[577],
+    ["reset_flags"] = FUNC_LIST[579],
+    ["strlen"] = FUNC_LIST[540],
+    ["malloc"] = FUNC_LIST[549],
+    ["free"] = FUNC_LIST[551],
+    ["_emscripten_stack_restore"] = FUNC_LIST[559],
+    ["emscripten_stack_get_current"] = FUNC_LIST[561],
 }
 
 --// __cxa_throw
@@ -45,21 +45,21 @@ local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, c
 
     --// Struct lua_CompileOptions (see luau/Compiler/include/luacode.h)
     local compileOptsPtr = cfns.malloc(28)
-    rt.store.i32(memory_at_0, compileOptsPtr + 0, optLevel or 1) --// int optimizationLevel
-    rt.store.i32(memory_at_0, compileOptsPtr + 4, dbgLevel or 1) --// int debugLevel
-    rt.store.i32(memory_at_0, compileOptsPtr + 8, covLevel or 0) --// int coverageLevel
-    rt.store.i32(memory_at_0, compileOptsPtr + 12, 0) --// const char* vectorLib
-    rt.store.i32(memory_at_0, compileOptsPtr + 16, 0) --// const char* vectorCtor
-    rt.store.i32(memory_at_0, compileOptsPtr + 20, 0) --// const char* vectorType
-    rt.store.i32(memory_at_0, compileOptsPtr + 24, 0) --// const char* const* mutableGlobals
+    rt_store_i32(memory_at_0, compileOptsPtr + 0, optLevel or 1) --// int optimizationLevel
+    rt_store_i32(memory_at_0, compileOptsPtr + 4, dbgLevel or 1) --// int debugLevel
+    rt_store_i32(memory_at_0, compileOptsPtr + 8, covLevel or 0) --// int coverageLevel
+    rt_store_i32(memory_at_0, compileOptsPtr + 12, 0) --// const char* vectorLib
+    rt_store_i32(memory_at_0, compileOptsPtr + 16, 0) --// const char* vectorCtor
+    rt_store_i32(memory_at_0, compileOptsPtr + 20, 0) --// const char* vectorType
+    rt_store_i32(memory_at_0, compileOptsPtr + 24, 0) --// const char* const* mutableGlobals
 
     --// Bytecode size
     local bcSizePtr = cfns.malloc(8)
 
     --// Compile
     local bcPtr = cfns.luau_compile(srcPtr, #src, compileOptsPtr, bcSizePtr)
-    local bcSize = rt.load.i32(memory_at_0, bcSizePtr)
-    local bc = rt.load.string(memory_at_0, bcPtr, bcSize)
+    local bcSize = rt_load_i32(memory_at_0, bcSizePtr)
+    local bc = rt_load_string(memory_at_0, bcPtr, bcSize)
 
     --// Cleanup
     cfns.free(srcPtr)

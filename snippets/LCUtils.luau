@@ -3,12 +3,12 @@ local CException = {} do
     CExcInternal.__index = CExcInternal
 
     function CExcInternal:_UndecoratedName()
-        local name_ptr = load_i32(memory_at_0, self.ptr + 4);
-        return rt.load.string(memory_at_0, name_ptr, cfns.strlen(name_ptr))
+        local name_ptr = rt_load_i32(memory_at_0, self.ptr + 4);
+        return rt_load_string(memory_at_0, name_ptr, cfns.strlen(name_ptr))
     end
 
     function CExcInternal:vfptr()
-        local vfptr = load_i32(memory_at_0, self.ptr);
+        local vfptr = rt_load_i32(memory_at_0, self.ptr);
         return vfptr
     end
 
@@ -20,8 +20,8 @@ end
 local function cstr(str)
     local strLen = #str
     local strPtr = cfns.malloc(strLen + 1)
-    rt.store.string(memory_at_0, strPtr, str)
-    rt.store.i32_n8(memory_at_0, strPtr + strLen, 0)
+    rt_store_string(memory_at_0, strPtr, str)
+    rt_store_i32_n8(memory_at_0, strPtr + strLen, 0)
     return strPtr
 end
 

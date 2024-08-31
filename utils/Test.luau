@@ -4,9 +4,9 @@ for i = 1, 10, 1 do
 end
 ]]
 
-local Compiler = require("Luau.LuauCeption.Compiler")
-local VM = require("Luau.LuauCeption.VM")
-local Full = require("Luau.LuauCeption.Full")
+local Compiler = require("../build/Luau.LuauCeption.Compiler")
+local VM = require("../build/Luau.LuauCeption.VM")
+local Full = require("../build/Luau.LuauCeption.Full")
 
 print("Compiler")
 print(Compiler.luau_compile(src, 1, 1, 0))
