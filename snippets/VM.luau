@@ -1,5 +1,5 @@
 --// LuauCeption - VM variant
---// Luau 0.640 (d518d14b922ff80e7e17d1912d637225472117a1)
+--// Luau 0.645 (02241b6d247201226a2592cc84860b1aa61a18fb)
 
 local STUB_WARN = true
 
@@ -217,7 +217,7 @@ end
 
 --// emscripten_memcpy_js (emscripten_memcpy_big)
 FUNC_LIST[4] = function(destination, source, size)
-    rt.store.copy(memory_at_0, destination, memory_at_0, source, size)
+    rt_store_copy(memory_at_0, destination, memory_at_0, source, size)
 end
 
 --// emscripten_date_now

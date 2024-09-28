@@ -1,18 +1,19 @@
 --// LuauCeption - Compiler variant
---// Luau 0.640 (d518d14b922ff80e7e17d1912d637225472117a1)
+--// Luau 0.645 (02241b6d247201226a2592cc84860b1aa61a18fb)
 
 local STUB_WARN = true
 
 local cfns = {
-    ["luau_compile"] = FUNC_LIST[271],
-    ["set_flag"] = FUNC_LIST[570],
-    ["set_all_flags"] = FUNC_LIST[577],
-    ["reset_flags"] = FUNC_LIST[579],
-    ["strlen"] = FUNC_LIST[540],
-    ["malloc"] = FUNC_LIST[549],
-    ["free"] = FUNC_LIST[551],
-    ["_emscripten_stack_restore"] = FUNC_LIST[559],
-    ["emscripten_stack_get_current"] = FUNC_LIST[561],
+    ["luau_compile"] = FUNC_LIST[272],
+    ["set_flag"] = FUNC_LIST[571],
+    ["set_all_flags"] = FUNC_LIST[578],
+    ["reset_flags"] = FUNC_LIST[580],
+    ["strlen"] = FUNC_LIST[541],
+    ["malloc"] = FUNC_LIST[550],
+    ["free"] = FUNC_LIST[552],
+    ["_emscripten_stack_restore"] = FUNC_LIST[560],
+    ["_emscripten_stack_alloc"] = FUNC_LIST[561],
+    ["emscripten_stack_get_current"] = FUNC_LIST[562],
 }
 
 --// __cxa_throw
@@ -23,7 +24,7 @@ end
 
 --// emscripten_memcpy_js (emscripten_memcpy_big)
 FUNC_LIST[1] = function(destination, source, size)
-    rt.store.copy(memory_at_0, destination, memory_at_0, source, size)
+    rt_store_copy(memory_at_0, destination, memory_at_0, source, size)
 end
 
 --// emscripten_resize_heap
@@ -39,19 +40,21 @@ end
 run_init_code()
 memory_at_0 = MEMORY_LIST[0]
 
-local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, covLevel: number?)
+local function luau_compile(src: string, optLevel: number?, dbgLevel: number?, typInfLevel: number?, covLevel: number?)
     --// Source string
     local srcPtr = cstr(src)
 
     --// Struct lua_CompileOptions (see luau/Compiler/include/luacode.h)
-    local compileOptsPtr = cfns.malloc(28)
+    local compileOptsPtr = cfns.malloc(36)
     rt_store_i32(memory_at_0, compileOptsPtr + 0, optLevel or 1) --// int optimizationLevel
     rt_store_i32(memory_at_0, compileOptsPtr + 4, dbgLevel or 1) --// int debugLevel
-    rt_store_i32(memory_at_0, compileOptsPtr + 8, covLevel or 0) --// int coverageLevel
-    rt_store_i32(memory_at_0, compileOptsPtr + 12, 0) --// const char* vectorLib
-    rt_store_i32(memory_at_0, compileOptsPtr + 16, 0) --// const char* vectorCtor
-    rt_store_i32(memory_at_0, compileOptsPtr + 20, 0) --// const char* vectorType
-    rt_store_i32(memory_at_0, compileOptsPtr + 24, 0) --// const char* const* mutableGlobals
+    rt_store_i32(memory_at_0, compileOptsPtr + 8, typInfLevel or 0) --// int typeInfoLevel
+    rt_store_i32(memory_at_0, compileOptsPtr + 12, covLevel or 0) --// int coverageLevel
+    rt_store_i32(memory_at_0, compileOptsPtr + 16, 0) --// const char* vectorLib
+    rt_store_i32(memory_at_0, compileOptsPtr + 20, 0) --// const char* vectorCtor
+    rt_store_i32(memory_at_0, compileOptsPtr + 24, 0) --// const char* vectorType
+    rt_store_i32(memory_at_0, compileOptsPtr + 28, 0) --// const char* const* mutableGlobals
+    rt_store_i32(memory_at_0, compileOptsPtr + 32, 0) --// const char* const* userdataTypes
 
     --// Bytecode size
     local bcSizePtr = cfns.malloc(8)
