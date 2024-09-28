@@ -208,7 +208,40 @@ end
 --// invoke_vii
 FUNC_LIST[1] = invokeHandler(1)
 
-FUNC_LIST[2] = stub("strftime", 0)
+--// strftime
+FUNC_LIST[2] = function(str, count, format, tp)
+    --// https://en.cppreference.com/w/cpp/chrono/c/tm
+    local sec   = rt_load_i32(memory_at_0, tp + 0)
+    local min   = rt_load_i32(memory_at_0, tp + 4)
+    local hour  = rt_load_i32(memory_at_0, tp + 8)
+    local mday  = rt_load_i32(memory_at_0, tp + 12)
+    local mon   = rt_load_i32(memory_at_0, tp + 16)
+    local year  = rt_load_i32(memory_at_0, tp + 20)
+    local wday  = rt_load_i32(memory_at_0, tp + 24)
+    local yday  = rt_load_i32(memory_at_0, tp + 28)
+    local isdst = rt_load_i32(memory_at_0, tp + 32)
+
+    local fmtStr = rt_load_string(memory_at_0, format, cfns.strlen(format))
+    local timetThing = os.time({
+        sec = sec,
+        min = min,
+        hour = hour,
+        day = mday,
+        month = mon,
+        year = year,
+        wday = wday,
+        yday = yday,
+        isdst = isdst == 1
+    })
+
+    local formatted = os.date(fmtStr, timetThing)
+    local dataLen = if #formatted < count then #formatted else count
+    local data = if #formatted < count then formatted else string.sub(formatted, 1, dataLen)
+    rt_store_string(memory_at_0, str, data, count)
+    rt_store_i32_n8(memory_at_0, str - 1, 0)
+
+    return dataLen
+end
 
 --// _abort_js
 FUNC_LIST[3] = function(reason)
@@ -254,8 +287,69 @@ FUNC_LIST[9] = function()
     assert(false, "Infinity")
 end
 
-FUNC_LIST[10] = stub("_localtime_js", 0)
-FUNC_LIST[11] = stub("_gmtime_js", 0)
+--// _localtime_js
+FUNC_LIST[10] = function(timer, buf)
+    local tdata = os.date("*t", timer)
+
+    --// https://en.cppreference.com/w/cpp/chrono/c/tm
+    local tm = cfns.malloc(36)
+    rt_store_i32(memory_at_0, tm + 0, tdata.sec) --// int tm_sec
+    rt_store_i32(memory_at_0, tm + 4, tdata.min) --// int tm_min
+    rt_store_i32(memory_at_0, tm + 8, tdata.hour) --// int tm_hour
+    rt_store_i32(memory_at_0, tm + 12, tdata.day) --// int tm_mday
+    rt_store_i32(memory_at_0, tm + 16, tdata.month) --// int tm_mon
+    rt_store_i32(memory_at_0, tm + 20, tdata.year) --// int tm_year
+    rt_store_i32(memory_at_0, tm + 24, tdata.wday) --// int tm_wday
+    rt_store_i32(memory_at_0, tm + 28, tdata.yday) --// int tm_yday
+    rt_store_i32(memory_at_0, tm + 32, if tdata.isdst then 1 else 0) --// int tm_isdst
+
+    --// https://en.cppreference.com/w/cpp/chrono/c/tm
+    if (buf ~= 0) then
+        rt_store_i32(memory_at_0, buf + 0, tdata.sec) --// int tm_sec
+        rt_store_i32(memory_at_0, buf + 4, tdata.min) --// int tm_min
+        rt_store_i32(memory_at_0, buf + 8, tdata.hour) --// int tm_hour
+        rt_store_i32(memory_at_0, buf + 12, tdata.day) --// int tm_mday
+        rt_store_i32(memory_at_0, buf + 16, tdata.month) --// int tm_mon
+        rt_store_i32(memory_at_0, buf + 20, tdata.year) --// int tm_year
+        rt_store_i32(memory_at_0, buf + 24, tdata.wday) --// int tm_wday
+        rt_store_i32(memory_at_0, buf + 28, tdata.yday) --// int tm_yday
+        rt_store_i32(memory_at_0, buf + 32, if tdata.isdst then 1 else 0) --// int tm_isdst
+    end
+
+    return tm
+end
+
+--// _gmtime_js
+FUNC_LIST[11] = function(timer, buf)
+    local tdata = os.date("!*t", timer)
+
+    --// https://en.cppreference.com/w/cpp/chrono/c/tm
+    local tm = cfns.malloc(36)
+    rt_store_i32(memory_at_0, tm + 0, tdata.sec) --// int tm_sec
+    rt_store_i32(memory_at_0, tm + 4, tdata.min) --// int tm_min
+    rt_store_i32(memory_at_0, tm + 8, tdata.hour) --// int tm_hour
+    rt_store_i32(memory_at_0, tm + 12, tdata.day) --// int tm_mday
+    rt_store_i32(memory_at_0, tm + 16, tdata.month) --// int tm_mon
+    rt_store_i32(memory_at_0, tm + 20, tdata.year) --// int tm_year
+    rt_store_i32(memory_at_0, tm + 24, tdata.wday) --// int tm_wday
+    rt_store_i32(memory_at_0, tm + 28, tdata.yday) --// int tm_yday
+    rt_store_i32(memory_at_0, tm + 32, if tdata.isdst then 1 else 0) --// int tm_isdst
+
+    --// https://en.cppreference.com/w/cpp/chrono/c/tm
+    if (buf ~= 0) then
+        rt_store_i32(memory_at_0, buf + 0, tdata.sec) --// int tm_sec
+        rt_store_i32(memory_at_0, buf + 4, tdata.min) --// int tm_min
+        rt_store_i32(memory_at_0, buf + 8, tdata.hour) --// int tm_hour
+        rt_store_i32(memory_at_0, buf + 12, tdata.day) --// int tm_mday
+        rt_store_i32(memory_at_0, buf + 16, tdata.month) --// int tm_mon
+        rt_store_i32(memory_at_0, buf + 20, tdata.year) --// int tm_year
+        rt_store_i32(memory_at_0, buf + 24, tdata.wday) --// int tm_wday
+        rt_store_i32(memory_at_0, buf + 28, tdata.yday) --// int tm_yday
+        rt_store_i32(memory_at_0, buf + 32, if tdata.isdst then 1 else 0) --// int tm_isdst
+    end
+
+    return tm
+end
 
 run_init_code()
 memory_at_0 = MEMORY_LIST[0]

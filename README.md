@@ -2,7 +2,6 @@
 Running Luau inside Luau. Inspired by [@Rerumu's LuauInLuau](https://gist.github.com/Rerumu/ecaf1de2f2b31d0fa91b9bac8e1e15d8).
 
 ## Notes
-- ``strftime`` isn't implemented, os.date will NOT work (doesn't error code, but it will return a empty string)
 - There's existing work on getting analysis to work (at the ``analysis`` branch), however it doesn't work (code aborts)
 
 ## Testing
