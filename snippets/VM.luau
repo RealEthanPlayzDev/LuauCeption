@@ -380,6 +380,9 @@ local function luau_run(bc: string, chunkName: string?, safeEnv: boolean?)
     --// Call function
     local clRes = cfns.lua_pcall(L, 0, 0, 0)
 
+    --// Cleanup state
+    cfns.lua_close(L)
+
     return clRes == 0
 end
 
