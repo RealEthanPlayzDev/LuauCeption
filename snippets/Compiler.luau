@@ -1,20 +1,27 @@
 --// LuauCeption - Compiler variant
---// Luau 0.645 (02241b6d247201226a2592cc84860b1aa61a18fb)
+--// Luau 0.648 (e491128f95ceea762171525fccbb557b84811e1b)
 
 local STUB_WARN = true
 
 local cfns = {
-    ["luau_compile"] = FUNC_LIST[272],
-    ["set_flag"] = FUNC_LIST[571],
-    ["set_all_flags"] = FUNC_LIST[578],
-    ["reset_flags"] = FUNC_LIST[580],
-    ["strlen"] = FUNC_LIST[541],
-    ["malloc"] = FUNC_LIST[550],
-    ["free"] = FUNC_LIST[552],
-    ["_emscripten_stack_restore"] = FUNC_LIST[560],
-    ["_emscripten_stack_alloc"] = FUNC_LIST[561],
-    ["emscripten_stack_get_current"] = FUNC_LIST[562],
+    ["luau_compile"] = FUNC_LIST[275],
+    ["set_flag"] = FUNC_LIST[574],
+    ["set_all_flags"] = FUNC_LIST[581],
+    ["reset_flags"] = FUNC_LIST[583],
+    ["strlen"] = FUNC_LIST[544],
+    ["malloc"] = FUNC_LIST[553],
+    ["_emscripten_timeout"] = FUNC_LIST[770],
+    ["free"] = FUNC_LIST[555],
+    ["_emscripten_stack_restore"] = FUNC_LIST[563],
+    ["_emscripten_stack_alloc"] = FUNC_LIST[564],
+    ["emscripten_stack_get_current"] = FUNC_LIST[565],
 }
+
+local timers = {}
+local noExitRuntime = true
+local rtKeepAliveCounter = 0
+local abortWasm = false
+local exitStatus = nil
 
 --// __cxa_throw
 FUNC_LIST[0] = function(except, info, _dtor)
@@ -35,6 +42,63 @@ end
 --// _abort_js
 FUNC_LIST[3] = function(reason)
     assert(false, `Aborted({reason})`)
+end
+
+--// _setitimer_js
+FUNC_LIST[4] = function(which, timeoutMs)
+    if (not task) then
+        print("program is using _setitimer_js but task library not found, timers will NOT work.")
+        return 0
+    end
+
+    if (timers[which]) then
+        task.cancel(timers[which].thread)
+        timers[which] = nil
+    end
+    if (not timeoutMs or timeoutMs == 0) then return 0 end
+
+    local t = task.delay(function()
+        timers[which] = nil
+        if (abortWasm) then return end
+        local success, e = pcall(function()
+            cfns._emscripten_timeout(which, os.clock())
+            if (not (noExitRuntime or rtKeepAliveCounter > 0)) then
+                local success, e = pcall(FUNC_LIST[6], exitStatus)
+                if (not success) then
+                    if (string.match(e, "ExitStatus:" ~= nil or e == "unwind")) then
+                        return exitStatus
+                    end
+                    assert(false, e)
+                end
+            end
+        end)
+
+        if (not success) then
+            if (string.match(e, "ExitStatus:" ~= nil or e == "unwind")) then
+                return
+            end
+            assert(false, e)
+        end
+    end, timeoutMs / 1000)
+
+    timers[which] = { thread = t, timeoutMs = timeoutMs }
+    return 0
+end
+
+--// _emscripten_runtime_keepalive_clear
+FUNC_LIST[5] = function()
+    noExitRuntime = false
+    rtKeepAliveCounter = 0
+    return
+end
+
+--// proc_exit
+FUNC_LIST[6] = function(code)
+    exitStatus = code
+    if (not (noExitRuntime or rtKeepAliveCounter > 0)) then
+        abortWasm = true
+    end
+    assert(false, `ExitStatus: Program exited with code ${code}`)
 end
 
 run_init_code()
@@ -78,6 +142,7 @@ return {
     luau_setflag = luau_setflag,
     luau_setallflags = luau_setallflags,
     luau_resetflags = luau_resetflags,
+    macros = macros,
 	wasm = {
 		rt = rt,
 		cfns = cfns,

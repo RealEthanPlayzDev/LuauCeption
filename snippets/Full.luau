@@ -1,193 +1,199 @@
 --// LuauCeption - Full variant
---// Luau 0.645 (02241b6d247201226a2592cc84860b1aa61a18fb)
+--// Luau 0.648 (e491128f95ceea762171525fccbb557b84811e1b)
 
 local STUB_WARN = true
 
 local cfns = {
-    ["luaL_newstate"] = FUNC_LIST[584],
-    ["luau_compile"] = FUNC_LIST[280],
-    ["lua_close"] = FUNC_LIST[651],
-    ["set_flag"] = FUNC_LIST[1163],
-    ["set_all_flags"] = FUNC_LIST[1170],
-    ["reset_flags"] = FUNC_LIST[1172],
-    ["strlen"] = FUNC_LIST[1128],
-    ["malloc"] = FUNC_LIST[1133],
-    ["lua_checkstack"] = FUNC_LIST[355],
-    ["lua_rawcheckstack"] = FUNC_LIST[356],
-    ["lua_xmove"] = FUNC_LIST[357],
-    ["lua_xpush"] = FUNC_LIST[358],
-    ["lua_newthread"] = FUNC_LIST[359],
-    ["lua_mainthread"] = FUNC_LIST[360],
-    ["lua_absindex"] = FUNC_LIST[361],
-    ["lua_gettop"] = FUNC_LIST[362],
-    ["lua_settop"] = FUNC_LIST[363],
-    ["lua_remove"] = FUNC_LIST[364],
-    ["lua_insert"] = FUNC_LIST[365],
-    ["lua_replace"] = FUNC_LIST[366],
-    ["lua_pushvalue"] = FUNC_LIST[367],
-    ["lua_type"] = FUNC_LIST[368],
-    ["lua_typename"] = FUNC_LIST[369],
-    ["lua_iscfunction"] = FUNC_LIST[370],
-    ["lua_isLfunction"] = FUNC_LIST[371],
-    ["lua_isnumber"] = FUNC_LIST[372],
-    ["lua_isstring"] = FUNC_LIST[373],
-    ["lua_isuserdata"] = FUNC_LIST[374],
-    ["lua_rawequal"] = FUNC_LIST[375],
-    ["lua_equal"] = FUNC_LIST[376],
-    ["lua_lessthan"] = FUNC_LIST[377],
-    ["lua_tonumberx"] = FUNC_LIST[378],
-    ["lua_tointegerx"] = FUNC_LIST[379],
-    ["lua_toboolean"] = FUNC_LIST[381],
-    ["lua_tolstring"] = FUNC_LIST[382],
-    ["lua_tostringatom"] = FUNC_LIST[383],
-    ["lua_namecallatom"] = FUNC_LIST[384],
-    ["lua_tovector"] = FUNC_LIST[385],
-    ["lua_objlen"] = FUNC_LIST[386],
-    ["lua_tocfunction"] = FUNC_LIST[387],
-    ["lua_tolightuserdata"] = FUNC_LIST[388],
-    ["lua_tolightuserdatatagged"] = FUNC_LIST[389],
-    ["lua_touserdata"] = FUNC_LIST[390],
-    ["lua_touserdatatagged"] = FUNC_LIST[391],
-    ["lua_userdatatag"] = FUNC_LIST[392],
-    ["lua_lightuserdatatag"] = FUNC_LIST[393],
-    ["lua_tothread"] = FUNC_LIST[394],
-    ["lua_tobuffer"] = FUNC_LIST[395],
-    ["lua_topointer"] = FUNC_LIST[396],
-    ["lua_pushnil"] = FUNC_LIST[397],
-    ["lua_pushnumber"] = FUNC_LIST[398],
-    ["lua_pushinteger"] = FUNC_LIST[399],
-    ["lua_pushunsigned"] = FUNC_LIST[400],
-    ["lua_pushvector"] = FUNC_LIST[401],
-    ["lua_pushlstring"] = FUNC_LIST[402],
-    ["lua_pushstring"] = FUNC_LIST[403],
-    ["lua_pushvfstring"] = FUNC_LIST[404],
-    ["lua_pushfstringL"] = FUNC_LIST[405],
-    ["lua_pushcclosurek"] = FUNC_LIST[406],
-    ["lua_pushboolean"] = FUNC_LIST[407],
-    ["lua_pushlightuserdatatagged"] = FUNC_LIST[408],
-    ["lua_pushthread"] = FUNC_LIST[409],
-    ["lua_gettable"] = FUNC_LIST[410],
-    ["lua_getfield"] = FUNC_LIST[411],
-    ["lua_rawgetfield"] = FUNC_LIST[412],
-    ["lua_rawget"] = FUNC_LIST[413],
-    ["lua_rawgeti"] = FUNC_LIST[414],
-    ["lua_createtable"] = FUNC_LIST[415],
-    ["lua_setreadonly"] = FUNC_LIST[416],
-    ["lua_getreadonly"] = FUNC_LIST[417],
-    ["lua_setsafeenv"] = FUNC_LIST[418],
-    ["lua_getmetatable"] = FUNC_LIST[419],
-    ["lua_settable"] = FUNC_LIST[421],
-    ["lua_setfield"] = FUNC_LIST[422],
-    ["lua_rawsetfield"] = FUNC_LIST[423],
-    ["lua_rawset"] = FUNC_LIST[424],
-    ["lua_rawseti"] = FUNC_LIST[425],
-    ["lua_setmetatable"] = FUNC_LIST[426],
-    ["lua_setfenv"] = FUNC_LIST[427],
-    ["lua_call"] = FUNC_LIST[428],
-    ["lua_pcall"] = FUNC_LIST[429],
-    ["lua_status"] = FUNC_LIST[431],
-    ["lua_costatus"] = FUNC_LIST[432],
-    ["lua_getthreaddata"] = FUNC_LIST[433],
-    ["lua_setthreaddata"] = FUNC_LIST[434],
-    ["lua_gc"] = FUNC_LIST[435],
-    ["lua_error"] = FUNC_LIST[436],
-    ["lua_next"] = FUNC_LIST[437],
-    ["lua_rawiter"] = FUNC_LIST[438],
-    ["lua_concat"] = FUNC_LIST[439],
-    ["lua_newuserdatatagged"] = FUNC_LIST[440],
-    ["lua_newuserdatadtor"] = FUNC_LIST[441],
-    ["lua_newbuffer"] = FUNC_LIST[442],
-    ["lua_getupvalue"] = FUNC_LIST[443],
-    ["lua_setupvalue"] = FUNC_LIST[444],
-    ["lua_encodepointer"] = FUNC_LIST[445],
-    ["lua_ref"] = FUNC_LIST[446],
-    ["lua_unref"] = FUNC_LIST[447],
-    ["lua_setuserdatatag"] = FUNC_LIST[448],
-    ["lua_setuserdatadtor"] = FUNC_LIST[449],
-    ["lua_getuserdatadtor"] = FUNC_LIST[450],
-    ["lua_setlightuserdataname"] = FUNC_LIST[451],
-    ["lua_getlightuserdataname"] = FUNC_LIST[452],
-    ["lua_clonefunction"] = FUNC_LIST[453],
-    ["lua_cleartable"] = FUNC_LIST[454],
-    ["lua_setmemcat"] = FUNC_LIST[455],
-    ["lua_totalbytes"] = FUNC_LIST[456],
-    ["lua_getallocf"] = FUNC_LIST[457],
-    ["luaL_argerrorL"] = FUNC_LIST[458],
-    ["luaL_errorL"] = FUNC_LIST[459],
-    ["luaL_where"] = FUNC_LIST[460],
-    ["luaL_typeerrorL"] = FUNC_LIST[461],
-    ["luaL_checkoption"] = FUNC_LIST[462],
-    ["luaL_optlstring"] = FUNC_LIST[464],
-    ["luaL_checklstring"] = FUNC_LIST[465],
-    ["luaL_newmetatable"] = FUNC_LIST[466],
-    ["luaL_checkudata"] = FUNC_LIST[467],
-    ["luaL_checkbuffer"] = FUNC_LIST[468],
-    ["luaL_checkstack"] = FUNC_LIST[469],
-    ["luaL_checktype"] = FUNC_LIST[470],
-    ["luaL_checkany"] = FUNC_LIST[471],
-    ["luaL_checknumber"] = FUNC_LIST[472],
-    ["luaL_optnumber"] = FUNC_LIST[473],
-    ["luaL_checkboolean"] = FUNC_LIST[474],
-    ["luaL_optboolean"] = FUNC_LIST[475],
-    ["luaL_checkinteger"] = FUNC_LIST[476],
-    ["luaL_optinteger"] = FUNC_LIST[477],
-    ["luaL_checkunsigned"] = FUNC_LIST[478],
-    ["luaL_optunsigned"] = FUNC_LIST[479],
-    ["luaL_checkvector"] = FUNC_LIST[480],
-    ["luaL_optvector"] = FUNC_LIST[481],
-    ["luaL_getmetafield"] = FUNC_LIST[482],
-    ["luaL_callmeta"] = FUNC_LIST[483],
-    ["luaL_register"] = FUNC_LIST[484],
-    ["luaL_findtable"] = FUNC_LIST[485],
-    ["luaL_typename"] = FUNC_LIST[486],
-    ["luaL_buffinitsize"] = FUNC_LIST[488],
-    ["luaL_prepbuffsize"] = FUNC_LIST[490],
-    ["luaL_addlstring"] = FUNC_LIST[491],
-    ["luaL_addvalue"] = FUNC_LIST[492],
-    ["luaL_addvalueany"] = FUNC_LIST[493],
-    ["luaL_tolstring"] = FUNC_LIST[494],
-    ["luaL_pushresult"] = FUNC_LIST[495],
-    ["luaL_pushresultsize"] = FUNC_LIST[496],
-    ["luaopen_base"] = FUNC_LIST[499],
-    ["luaopen_bit32"] = FUNC_LIST[543],
-    ["luaopen_buffer"] = FUNC_LIST[559],
-    ["luaopen_coroutine"] = FUNC_LIST[527],
-    ["luaopen_debug"] = FUNC_LIST[540],
-    ["lua_getargument"] = FUNC_LIST[311],
-    ["lua_getlocal"] = FUNC_LIST[312],
-    ["lua_setlocal"] = FUNC_LIST[313],
-    ["lua_stackdepth"] = FUNC_LIST[314],
-    ["lua_getinfo"] = FUNC_LIST[315],
-    ["lua_singlestep"] = FUNC_LIST[328],
-    ["lua_breakpoint"] = FUNC_LIST[329],
-    ["lua_getcoverage"] = FUNC_LIST[331],
-    ["lua_debugtrace"] = FUNC_LIST[334],
-    ["lua_resume"] = FUNC_LIST[343],
-    ["lua_resumeerror"] = FUNC_LIST[346],
-    ["lua_yield"] = FUNC_LIST[347],
-    ["lua_break"] = FUNC_LIST[348],
-    ["lua_isyieldable"] = FUNC_LIST[349],
-    ["luaL_openlibs"] = FUNC_LIST[581],
-    ["luaL_sandbox"] = FUNC_LIST[582],
-    ["luaL_sandboxthread"] = FUNC_LIST[583],
-    ["lua_clock"] = FUNC_LIST[642],
-    ["lua_newstate"] = FUNC_LIST[648],
-    ["free"] = FUNC_LIST[1135],
-    ["lua_resetthread"] = FUNC_LIST[646],
-    ["luaopen_table"] = FUNC_LIST[704],
-    ["luaopen_os"] = FUNC_LIST[637],
-    ["luaopen_string"] = FUNC_LIST[657],
-    ["luaopen_math"] = FUNC_LIST[586],
-    ["luaopen_utf8"] = FUNC_LIST[734],
-    ["lua_isthreadreset"] = FUNC_LIST[647],
-    ["luau_load"] = FUNC_LIST[826],
-    ["setThrew"] = FUNC_LIST[1143],
-    ["_emscripten_stack_restore"] = FUNC_LIST[1152],
-    ["emscripten_stack_get_current"] = FUNC_LIST[1154],
+    ["luaL_newstate"] = FUNC_LIST[586],
+    ["luau_compile"] = FUNC_LIST[282],
+    ["lua_close"] = FUNC_LIST[654],
+    ["set_flag"] = FUNC_LIST[1166],
+    ["set_all_flags"] = FUNC_LIST[1173],
+    ["reset_flags"] = FUNC_LIST[1175],
+    ["strlen"] = FUNC_LIST[1131],
+    ["malloc"] = FUNC_LIST[1136],
+    ["lua_checkstack"] = FUNC_LIST[357],
+    ["lua_rawcheckstack"] = FUNC_LIST[358],
+    ["lua_xmove"] = FUNC_LIST[359],
+    ["lua_xpush"] = FUNC_LIST[360],
+    ["lua_newthread"] = FUNC_LIST[361],
+    ["lua_mainthread"] = FUNC_LIST[362],
+    ["lua_absindex"] = FUNC_LIST[363],
+    ["lua_gettop"] = FUNC_LIST[364],
+    ["lua_settop"] = FUNC_LIST[365],
+    ["lua_remove"] = FUNC_LIST[366],
+    ["lua_insert"] = FUNC_LIST[367],
+    ["lua_replace"] = FUNC_LIST[368],
+    ["lua_pushvalue"] = FUNC_LIST[369],
+    ["lua_type"] = FUNC_LIST[370],
+    ["lua_typename"] = FUNC_LIST[371],
+    ["lua_iscfunction"] = FUNC_LIST[372],
+    ["lua_isLfunction"] = FUNC_LIST[373],
+    ["lua_isnumber"] = FUNC_LIST[374],
+    ["lua_isstring"] = FUNC_LIST[375],
+    ["lua_isuserdata"] = FUNC_LIST[376],
+    ["lua_rawequal"] = FUNC_LIST[377],
+    ["lua_equal"] = FUNC_LIST[378],
+    ["lua_lessthan"] = FUNC_LIST[379],
+    ["lua_tonumberx"] = FUNC_LIST[380],
+    ["lua_tointegerx"] = FUNC_LIST[381],
+    ["lua_toboolean"] = FUNC_LIST[383],
+    ["lua_tolstring"] = FUNC_LIST[384],
+    ["lua_tostringatom"] = FUNC_LIST[385],
+    ["lua_namecallatom"] = FUNC_LIST[386],
+    ["lua_tovector"] = FUNC_LIST[387],
+    ["lua_objlen"] = FUNC_LIST[388],
+    ["lua_tocfunction"] = FUNC_LIST[389],
+    ["lua_tolightuserdata"] = FUNC_LIST[390],
+    ["lua_tolightuserdatatagged"] = FUNC_LIST[391],
+    ["lua_touserdata"] = FUNC_LIST[392],
+    ["lua_touserdatatagged"] = FUNC_LIST[393],
+    ["lua_userdatatag"] = FUNC_LIST[394],
+    ["lua_lightuserdatatag"] = FUNC_LIST[395],
+    ["lua_tothread"] = FUNC_LIST[396],
+    ["lua_tobuffer"] = FUNC_LIST[397],
+    ["lua_topointer"] = FUNC_LIST[398],
+    ["lua_pushnil"] = FUNC_LIST[399],
+    ["lua_pushnumber"] = FUNC_LIST[400],
+    ["lua_pushinteger"] = FUNC_LIST[401],
+    ["lua_pushunsigned"] = FUNC_LIST[402],
+    ["lua_pushvector"] = FUNC_LIST[403],
+    ["lua_pushlstring"] = FUNC_LIST[404],
+    ["lua_pushstring"] = FUNC_LIST[405],
+    ["lua_pushvfstring"] = FUNC_LIST[406],
+    ["lua_pushfstringL"] = FUNC_LIST[407],
+    ["lua_pushcclosurek"] = FUNC_LIST[408],
+    ["lua_pushboolean"] = FUNC_LIST[409],
+    ["lua_pushlightuserdatatagged"] = FUNC_LIST[410],
+    ["lua_pushthread"] = FUNC_LIST[411],
+    ["lua_gettable"] = FUNC_LIST[412],
+    ["lua_getfield"] = FUNC_LIST[413],
+    ["lua_rawgetfield"] = FUNC_LIST[414],
+    ["lua_rawget"] = FUNC_LIST[415],
+    ["lua_rawgeti"] = FUNC_LIST[416],
+    ["lua_createtable"] = FUNC_LIST[417],
+    ["lua_setreadonly"] = FUNC_LIST[418],
+    ["lua_getreadonly"] = FUNC_LIST[419],
+    ["lua_setsafeenv"] = FUNC_LIST[420],
+    ["lua_getmetatable"] = FUNC_LIST[421],
+    ["lua_settable"] = FUNC_LIST[423],
+    ["lua_setfield"] = FUNC_LIST[424],
+    ["lua_rawsetfield"] = FUNC_LIST[425],
+    ["lua_rawset"] = FUNC_LIST[426],
+    ["lua_rawseti"] = FUNC_LIST[427],
+    ["lua_setmetatable"] = FUNC_LIST[428],
+    ["lua_setfenv"] = FUNC_LIST[429],
+    ["lua_call"] = FUNC_LIST[430],
+    ["lua_pcall"] = FUNC_LIST[431],
+    ["lua_status"] = FUNC_LIST[433],
+    ["lua_costatus"] = FUNC_LIST[434],
+    ["lua_getthreaddata"] = FUNC_LIST[435],
+    ["lua_setthreaddata"] = FUNC_LIST[436],
+    ["lua_gc"] = FUNC_LIST[437],
+    ["lua_error"] = FUNC_LIST[438],
+    ["lua_next"] = FUNC_LIST[439],
+    ["lua_rawiter"] = FUNC_LIST[440],
+    ["lua_concat"] = FUNC_LIST[441],
+    ["lua_newuserdatatagged"] = FUNC_LIST[442],
+    ["lua_newuserdatadtor"] = FUNC_LIST[443],
+    ["lua_newbuffer"] = FUNC_LIST[444],
+    ["lua_getupvalue"] = FUNC_LIST[445],
+    ["lua_setupvalue"] = FUNC_LIST[446],
+    ["lua_encodepointer"] = FUNC_LIST[447],
+    ["lua_ref"] = FUNC_LIST[448],
+    ["lua_unref"] = FUNC_LIST[449],
+    ["lua_setuserdatatag"] = FUNC_LIST[450],
+    ["lua_setuserdatadtor"] = FUNC_LIST[451],
+    ["lua_getuserdatadtor"] = FUNC_LIST[452],
+    ["lua_setlightuserdataname"] = FUNC_LIST[453],
+    ["lua_getlightuserdataname"] = FUNC_LIST[454],
+    ["lua_clonefunction"] = FUNC_LIST[455],
+    ["lua_cleartable"] = FUNC_LIST[456],
+    ["lua_setmemcat"] = FUNC_LIST[457],
+    ["lua_totalbytes"] = FUNC_LIST[458],
+    ["lua_getallocf"] = FUNC_LIST[459],
+    ["luaL_argerrorL"] = FUNC_LIST[460],
+    ["luaL_errorL"] = FUNC_LIST[461],
+    ["luaL_where"] = FUNC_LIST[462],
+    ["luaL_typeerrorL"] = FUNC_LIST[463],
+    ["luaL_checkoption"] = FUNC_LIST[464],
+    ["luaL_optlstring"] = FUNC_LIST[466],
+    ["luaL_checklstring"] = FUNC_LIST[467],
+    ["luaL_newmetatable"] = FUNC_LIST[468],
+    ["luaL_checkudata"] = FUNC_LIST[469],
+    ["luaL_checkbuffer"] = FUNC_LIST[470],
+    ["luaL_checkstack"] = FUNC_LIST[471],
+    ["luaL_checktype"] = FUNC_LIST[472],
+    ["luaL_checkany"] = FUNC_LIST[473],
+    ["luaL_checknumber"] = FUNC_LIST[474],
+    ["luaL_optnumber"] = FUNC_LIST[475],
+    ["luaL_checkboolean"] = FUNC_LIST[476],
+    ["luaL_optboolean"] = FUNC_LIST[477],
+    ["luaL_checkinteger"] = FUNC_LIST[478],
+    ["luaL_optinteger"] = FUNC_LIST[479],
+    ["luaL_checkunsigned"] = FUNC_LIST[480],
+    ["luaL_optunsigned"] = FUNC_LIST[481],
+    ["luaL_checkvector"] = FUNC_LIST[482],
+    ["luaL_optvector"] = FUNC_LIST[483],
+    ["luaL_getmetafield"] = FUNC_LIST[484],
+    ["luaL_callmeta"] = FUNC_LIST[485],
+    ["luaL_register"] = FUNC_LIST[486],
+    ["luaL_findtable"] = FUNC_LIST[487],
+    ["luaL_typename"] = FUNC_LIST[488],
+    ["luaL_buffinitsize"] = FUNC_LIST[490],
+    ["luaL_prepbuffsize"] = FUNC_LIST[492],
+    ["luaL_addlstring"] = FUNC_LIST[493],
+    ["luaL_addvalue"] = FUNC_LIST[494],
+    ["luaL_addvalueany"] = FUNC_LIST[495],
+    ["luaL_tolstring"] = FUNC_LIST[496],
+    ["luaL_pushresult"] = FUNC_LIST[497],
+    ["luaL_pushresultsize"] = FUNC_LIST[498],
+    ["luaopen_base"] = FUNC_LIST[501],
+    ["luaopen_bit32"] = FUNC_LIST[545],
+    ["luaopen_buffer"] = FUNC_LIST[561],
+    ["luaopen_coroutine"] = FUNC_LIST[529],
+    ["luaopen_debug"] = FUNC_LIST[542],
+    ["lua_getargument"] = FUNC_LIST[313],
+    ["lua_getlocal"] = FUNC_LIST[314],
+    ["lua_setlocal"] = FUNC_LIST[315],
+    ["lua_stackdepth"] = FUNC_LIST[316],
+    ["lua_getinfo"] = FUNC_LIST[317],
+    ["lua_singlestep"] = FUNC_LIST[330],
+    ["lua_breakpoint"] = FUNC_LIST[331],
+    ["lua_getcoverage"] = FUNC_LIST[333],
+    ["lua_debugtrace"] = FUNC_LIST[336],
+    ["lua_resume"] = FUNC_LIST[345],
+    ["lua_resumeerror"] = FUNC_LIST[348],
+    ["lua_yield"] = FUNC_LIST[349],
+    ["lua_break"] = FUNC_LIST[350],
+    ["lua_isyieldable"] = FUNC_LIST[351],
+    ["luaL_openlibs"] = FUNC_LIST[583],
+    ["luaL_sandbox"] = FUNC_LIST[584],
+    ["luaL_sandboxthread"] = FUNC_LIST[585],
+    ["lua_clock"] = FUNC_LIST[645],
+    ["lua_newstate"] = FUNC_LIST[651],
+    ["free"] = FUNC_LIST[1138],
+    ["lua_resetthread"] = FUNC_LIST[649],
+    ["luaopen_table"] = FUNC_LIST[707],
+    ["luaopen_os"] = FUNC_LIST[640],
+    ["luaopen_string"] = FUNC_LIST[660],
+    ["luaopen_math"] = FUNC_LIST[588],
+    ["luaopen_utf8"] = FUNC_LIST[737],
+    ["lua_isthreadreset"] = FUNC_LIST[650],
+    ["luau_load"] = FUNC_LIST[829],
+    ["_emscripten_timeout"] = FUNC_LIST[1405],
+    ["setThrew"] = FUNC_LIST[1146],
+    ["_emscripten_stack_restore"] = FUNC_LIST[1155],
+    ["emscripten_stack_get_current"] = FUNC_LIST[1157],
 }
 
 local NOW_TIME = os.time() * 1000
 local FILE_MAP = { {}, {} }
+local timers = {}
+local noExitRuntime = true
+local rtKeepAliveCounter = 0
+local abortWasm = false
+local exitStatus = nil
 
 local function fd_flush(file)
     local final = table.concat(file)
@@ -209,55 +215,22 @@ end
 --// invoke_vii
 FUNC_LIST[1] = invokeHandler(1)
 
---// strftime
-FUNC_LIST[2] = function(str, count, format, tp)
-    --// https://en.cppreference.com/w/cpp/chrono/c/tm
-    local sec   = rt_load_i32(memory_at_0, tp + 0)
-    local min   = rt_load_i32(memory_at_0, tp + 4)
-    local hour  = rt_load_i32(memory_at_0, tp + 8)
-    local mday  = rt_load_i32(memory_at_0, tp + 12)
-    local mon   = rt_load_i32(memory_at_0, tp + 16)
-    local year  = rt_load_i32(memory_at_0, tp + 20)
-    local wday  = rt_load_i32(memory_at_0, tp + 24)
-    local yday  = rt_load_i32(memory_at_0, tp + 28)
-    local isdst = rt_load_i32(memory_at_0, tp + 32)
-
-    local fmtStr = rt_load_string(memory_at_0, format, cfns.strlen(format))
-    local timetThing = os.time({
-        sec = sec,
-        min = min,
-        hour = hour,
-        day = mday,
-        month = mon,
-        year = year,
-        wday = wday,
-        yday = yday,
-        isdst = isdst == 1
-    })
-
-    local formatted = os.date(fmtStr, timetThing)
-    local dataLen = if #formatted < count then #formatted else count
-    local data = if #formatted < count then formatted else string.sub(formatted, 1, dataLen)
-    rt_store_string(memory_at_0, str, data, count)
-    rt_store_i32_n8(memory_at_0, str - 1, 0)
-
-    return dataLen
-end
-
 --// _abort_js
-FUNC_LIST[3] = function(reason)
+FUNC_LIST[2] = function(reason)
     assert(false, `Aborted({reason})`)
 end
 
 --// emscripten_memcpy_js (emscripten_memcpy_big)
-FUNC_LIST[4] = function(destination, source, size)
+FUNC_LIST[3] = function(destination, source, size)
     rt.store.copy(memory_at_0, destination, memory_at_0, source, size)
 end
 
 --// emscripten_date_now
-FUNC_LIST[5] = function()
+FUNC_LIST[4] = function()
     return NOW_TIME + os.clock() * 1000
 end
+
+FUNC_LIST[5] = stub("_tzset_js", 0)
 
 --// fd_write
 FUNC_LIST[6] = function(fd, list, count, ret_pointer)
@@ -276,20 +249,76 @@ FUNC_LIST[6] = function(fd, list, count, ret_pointer)
     return 0
 end
 
-FUNC_LIST[7] = stub("_tzset_js", 0)
-
 --// emscripten_resize_heap
-FUNC_LIST[8] = function(_requestedSize)
+FUNC_LIST[7] = function(_requestedSize)
     assert(false, "OOM")
 end
 
 --// _emscripten_throw_longjmp
-FUNC_LIST[9] = function()
+FUNC_LIST[8] = function()
     assert(false, "Infinity")
 end
 
+--// _setitimer_js
+FUNC_LIST[9] = function(which, timeoutMs)
+    if (not task) then
+        print("program is using _setitimer_js but task library not found, timers will NOT work.")
+        return 0
+    end
+
+    if (timers[which]) then
+        task.cancel(timers[which].thread)
+        timers[which] = nil
+    end
+    if (not timeoutMs or timeoutMs == 0) then return 0 end
+
+    local t = task.delay(function()
+        timers[which] = nil
+        -- callUserCallback(() => __emscripten_timeout(which, _emscripten_get_now()));
+        if (abortWasm) then return end
+        local success, e = pcall(function()
+            cfns.__emscripten_timeout(which, os.clock())
+            if (not (noExitRuntime or rtKeepAliveCounter > 0)) then
+                local success, e = pcall(FUNC_LIST[6], exitStatus)
+                if (not success) then
+                    if (string.match(e, "ExitStatus:" ~= nil or e == "unwind")) then
+                        return exitStatus
+                    end
+                    assert(false, e)
+                end
+            end
+        end)
+
+        if (not success) then
+            if (string.match(e, "ExitStatus:" ~= nil or e == "unwind")) then
+                return
+            end
+            assert(false, e)
+        end
+    end, timeoutMs / 1000)
+
+    timers[which] = { thread = t, timeoutMs = timeoutMs }
+    return 0
+end
+
+--// _emscripten_runtime_keepalive_clear
+FUNC_LIST[10] = function()
+    noExitRuntime = false
+    rtKeepAliveCounter = 0
+    return
+end
+
+--// proc_exit
+FUNC_LIST[11] = function(code)
+    exitStatus = code
+    if (not (noExitRuntime or rtKeepAliveCounter > 0)) then
+        abortWasm = true
+    end
+    assert(false, `ExitStatus: Program exited with code ${code}`)
+end
+
 --// _localtime_js
-FUNC_LIST[10] = function(timer, buf)
+FUNC_LIST[12] = function(timer, buf)
     local tdata = os.date("*t", timer)
 
     --// https://en.cppreference.com/w/cpp/chrono/c/tm
@@ -321,7 +350,7 @@ FUNC_LIST[10] = function(timer, buf)
 end
 
 --// _gmtime_js
-FUNC_LIST[11] = function(timer, buf)
+FUNC_LIST[13] = function(timer, buf)
     local tdata = os.date("!*t", timer)
 
     --// https://en.cppreference.com/w/cpp/chrono/c/tm
@@ -433,6 +462,7 @@ return {
     luau_setflag = luau_setflag,
     luau_setallflags = luau_setallflags,
     luau_resetflags = luau_resetflags,
+    macros = macros,
     wasm = {
         start_time = NOW_TIME,
         file_map = FILE_MAP,
