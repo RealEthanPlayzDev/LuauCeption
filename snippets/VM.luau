@@ -405,6 +405,8 @@ return {
         rt = rt,
         cfns = cfns,
         indirect_function_table = TABLE_LIST[0],
-        memory = MEMORY_LIST[0]
+        memory = MEMORY_LIST[0],
+        insertCFunction = insertCFunction,
+        cstr = cstr
     }
 }

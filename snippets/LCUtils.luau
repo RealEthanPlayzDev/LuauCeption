@@ -46,3 +46,9 @@ local function invokeHandler(index)
         end
     end
 end
+
+local function insertCFunction(f)
+    local ptr = #TABLE_LIST[0].data + 1
+    TABLE_LIST[0].data[ptr] = f
+    return ptr
+end
