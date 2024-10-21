@@ -16,7 +16,7 @@ local macros do
     local LUA_TUSERDATA      = 8
     local LUA_TTHREAD        = 9
     local LUA_TBUFFER        = 10
-    local LUA_TPROTO         = LUA_TPROTO
+    local LUA_TPROTO         = 11
     local LUA_TUPVAL         = 12
     local LUA_TDEADKEY       = 13
     local LUA_T_COUNT        = LUA_TPROTO
@@ -129,7 +129,7 @@ local macros do
         luaL_argexpected      = function(L, cond, arg, tname)    return if cond == 1 then 0 else cfns.luaL_typeerror(L, arg, tname) end,
         luaL_checkstring      = function(L, n)                   return cfns.luaL_checklstring(L, n, NULL) end,
         luaL_optstring        = function(L, n, d)                return cfns.luaL_optlstring(L, n, d, NULL) end,
-        luaL_getmetatable     = function(L, n)                   return lua_getfield(L, LUA_REGISTRYINDEX, n) end,
+        luaL_getmetatable     = function(L, n)                   return cfns.lua_getfield(L, LUA_REGISTRYINDEX, n) end,
         --// luaL_opt         = function(L, f, n, d)             return if (lua_isnoneornil(L, n) == 1) then d else f(L, n) end,
         --// luaL_addchar     = function(B, c)                   return ((void)((B)->p < (B)->end || luaL_prepbuffsize(B, 1)), (*(B)->p++ = (char)(c))) end,
         luaL_addstring        = function(B, s)                   return cfns.luaL_addlstring(B, s, cfns.strlen(s)) end,
