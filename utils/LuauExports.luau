@@ -58,6 +58,7 @@ lua_pushboolean
 lua_pushthread
 lua_pushlightuserdatatagged
 lua_newuserdatatagged
+lua_newuserdatataggedwithmetatable
 lua_newuserdatadtor
 lua_newbuffer
 lua_gettable
@@ -166,6 +167,7 @@ luaopen_buffer
 luaopen_utf8
 luaopen_math
 luaopen_debug
+luaopen_vector
 luaL_openlibs
 luaL_sandbox
 luaL_sandboxthread]]

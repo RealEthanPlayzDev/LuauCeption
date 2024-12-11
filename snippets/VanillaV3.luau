@@ -1,10 +1,13 @@
 --// Vanilla Luau Vector3 implementation
 --// Provides Vector3 lib if no existing implementation is available
 --// Missing: xAxis, yAxis, zAxis, Magnitude, Unit, and all namecall functions
---// Last checked: 06 April 2024
+--// Last checked: 11 December 2024
 local type = type
 local typeof = typeof
-local Vector3 = Vector3
+local Vector3 = Vector3 do
+    local lOk, lRbx = pcall(require, "@lune/roblox")
+    Vector3 = Vector3 or (if lOk then lRbx.Vector3 else nil) or (if vector then { new = vector.create } else nil)
+end
 if not Vector3 then
     local Vector3Internal = {}
     Vector3Internal.__index = Vector3Internal

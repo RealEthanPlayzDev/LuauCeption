@@ -1,20 +1,19 @@
 --// LuauCeption - Compiler variant
---// Luau 0.648 (e491128f95ceea762171525fccbb557b84811e1b)
+--// Luau 0.654 (8cc289fae430d9b0c22bde209fe5cf2d01751ff1)
 
 local STUB_WARN = true
 
 local cfns = {
-    ["luau_compile"] = FUNC_LIST[275],
-    ["set_flag"] = FUNC_LIST[574],
-    ["set_all_flags"] = FUNC_LIST[581],
-    ["reset_flags"] = FUNC_LIST[583],
-    ["strlen"] = FUNC_LIST[544],
-    ["malloc"] = FUNC_LIST[553],
+    ["luau_compile"] = FUNC_LIST[276],
+    ["set_flag"] = FUNC_LIST[575],
+    ["set_all_flags"] = FUNC_LIST[582],
+    ["reset_flags"] = FUNC_LIST[584],
+    ["strlen"] = FUNC_LIST[545],
+    ["malloc"] = FUNC_LIST[552],
     ["_emscripten_timeout"] = FUNC_LIST[770],
-    ["free"] = FUNC_LIST[555],
-    ["_emscripten_stack_restore"] = FUNC_LIST[563],
-    ["_emscripten_stack_alloc"] = FUNC_LIST[564],
-    ["emscripten_stack_get_current"] = FUNC_LIST[565],
+    ["free"] = FUNC_LIST[554],
+    ["_emscripten_stack_restore"] = FUNC_LIST[564],
+    ["emscripten_stack_get_current"] = FUNC_LIST[566],
 }
 
 local timers = {}

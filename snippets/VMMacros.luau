@@ -93,6 +93,7 @@ local macros do
         LUA_UTF8LIBNAME       = "utf8",
         LUA_MATHLIBNAME       = "math",
         LUA_DBLIBNAME         = "debug",
+        LUA_VECLIBNAME        = "vector",
 
         lua_upvalueindex      = function(i)                      return LUA_GLOBALSINDEX - i end,
         lua_ispseudo          = function(i)                      return if (i <= LUA_REGISTRYINDEX) then 1 else 0 end,
